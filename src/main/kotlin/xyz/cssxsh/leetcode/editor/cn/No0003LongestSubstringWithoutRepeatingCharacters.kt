@@ -1,6 +1,6 @@
 package xyz.cssxsh.leetcode.editor.cn
 
-class No0003LongestSubstringWithoutRepeatingCharacters {
+object No0003LongestSubstringWithoutRepeatingCharacters {
     //leetcode submit region begin(Prohibit modification and deletion)
     class Solution {
         fun lengthOfLongestSubstring(s: String): Int {

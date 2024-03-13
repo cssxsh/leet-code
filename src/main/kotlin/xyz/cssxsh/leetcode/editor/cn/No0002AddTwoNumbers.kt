@@ -2,7 +2,7 @@ package xyz.cssxsh.leetcode.editor.cn
 
 import xyz.cssxsh.leetcode.editor.cn.data.ListNode
 
-class No0002AddTwoNumbers {
+object No0002AddTwoNumbers {
     //leetcode submit region begin(Prohibit modification and deletion)
     /**
      * Example:

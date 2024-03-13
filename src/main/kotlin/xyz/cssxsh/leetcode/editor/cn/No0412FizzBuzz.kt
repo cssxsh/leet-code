@@ -1,6 +1,6 @@
 package xyz.cssxsh.leetcode.editor.cn
 
-class No0412FizzBuzz {
+object No0412FizzBuzz {
     //leetcode submit region begin(Prohibit modification and deletion)
     class Solution {
         fun fizzBuzz(n: Int): List<String> {
@@ -31,5 +31,4 @@ class No0412FizzBuzz {
         }
     }
     //leetcode submit region end(Prohibit modification and deletion)
-
 }

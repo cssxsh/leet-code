@@ -2,7 +2,7 @@ package xyz.cssxsh.leetcode.editor.cn
 
 import xyz.cssxsh.leetcode.editor.cn.data.ListNode
 
-class No0876MiddleOfTheLinkedList {
+object No0876MiddleOfTheLinkedList {
     //leetcode submit region begin(Prohibit modification and deletion)
     /**
      * Example:
@@ -27,5 +27,4 @@ class No0876MiddleOfTheLinkedList {
         }
     }
     //leetcode submit region end(Prohibit modification and deletion)
-
 }

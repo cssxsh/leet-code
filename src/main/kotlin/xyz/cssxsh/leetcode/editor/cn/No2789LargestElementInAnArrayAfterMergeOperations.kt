@@ -1,6 +1,6 @@
 package xyz.cssxsh.leetcode.editor.cn
 
-class No2789LargestElementInAnArrayAfterMergeOperations {
+object No2789LargestElementInAnArrayAfterMergeOperations {
     //leetcode submit region begin(Prohibit modification and deletion)
     class Solution {
         fun maxArrayValue(nums: IntArray): Long {

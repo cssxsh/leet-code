@@ -1,6 +1,6 @@
 package xyz.cssxsh.leetcode.editor.cn
 
-class No2864MaximumOddBinaryNumber {
+object No2864MaximumOddBinaryNumber {
     //leetcode submit region begin(Prohibit modification and deletion)
     class Solution {
         fun maximumOddBinaryNumber(s: String): String {

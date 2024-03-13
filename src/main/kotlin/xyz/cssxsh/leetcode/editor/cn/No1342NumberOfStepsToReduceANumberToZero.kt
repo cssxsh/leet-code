@@ -1,6 +1,6 @@
 package xyz.cssxsh.leetcode.editor.cn
 
-class No1342NumberOfStepsToReduceANumberToZero {
+object No1342NumberOfStepsToReduceANumberToZero {
     //leetcode submit region begin(Prohibit modification and deletion)
     class Solution {
         fun numberOfSteps(num: Int): Int {

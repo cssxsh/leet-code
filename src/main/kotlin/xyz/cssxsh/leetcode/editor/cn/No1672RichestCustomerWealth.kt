@@ -1,6 +1,6 @@
 package xyz.cssxsh.leetcode.editor.cn
 
-class No1672RichestCustomerWealth {
+object No1672RichestCustomerWealth {
     //leetcode submit region begin(Prohibit modification and deletion)
     class Solution {
         fun maximumWealth(accounts: Array<IntArray>): Int {
@@ -12,5 +12,4 @@ class No1672RichestCustomerWealth {
         }
     }
     //leetcode submit region end(Prohibit modification and deletion)
-
 }

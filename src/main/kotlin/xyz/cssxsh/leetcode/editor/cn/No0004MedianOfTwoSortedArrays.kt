@@ -1,6 +1,6 @@
 package xyz.cssxsh.leetcode.editor.cn
 
-class No0004MedianOfTwoSortedArrays {
+object No0004MedianOfTwoSortedArrays {
     //leetcode submit region begin(Prohibit modification and deletion)
     class Solution {
         fun findMedianSortedArrays(nums1: IntArray, nums2: IntArray): Double {

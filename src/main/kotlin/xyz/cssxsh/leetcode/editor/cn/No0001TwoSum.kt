@@ -1,6 +1,6 @@
 package xyz.cssxsh.leetcode.editor.cn
 
-class No0001TwoSum {
+object No0001TwoSum {
     //leetcode submit region begin(Prohibit modification and deletion)
     class Solution {
         fun twoSum(nums: IntArray, target: Int): IntArray {
