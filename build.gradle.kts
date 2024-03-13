@@ -1,6 +1,5 @@
 plugins {
     kotlin("jvm") version "1.9.23"
-    application
 }
 
 group = "xyz.cssxsh.leetcode"
@@ -15,7 +14,6 @@ dependencies {
 }
 
 kotlin {
-    explicitApi()
     target.compilations {
         all {
             kotlinOptions {
@@ -34,8 +32,4 @@ tasks {
     test {
         useJUnitPlatform()
     }
-}
-
-application {
-    mainClass.set("MainKt")
 }
