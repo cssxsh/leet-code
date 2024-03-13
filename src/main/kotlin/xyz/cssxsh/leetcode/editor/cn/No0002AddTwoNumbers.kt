@@ -1,12 +1,8 @@
 package xyz.cssxsh.leetcode.editor.cn
 
+import xyz.cssxsh.leetcode.editor.cn.data.ListNode
+
 class No0002AddTwoNumbers {
-    class ListNode(var `val`: Int) {
-        var next: ListNode? = null
-    }
-
-
-
     //leetcode submit region begin(Prohibit modification and deletion)
     /**
      * Example:
