@@ -27,7 +27,7 @@ internal fun runSolution(classifier: KClass<*>, vararg args: String) {
             if (parameter.kind == KParameter.Kind.INSTANCE) return@associateWith classifier.createInstance()
             val line = lines[offset + parameter.index - 1]
             when (parameter.type) {
-                typeOf<String>() -> line
+                typeOf<String>() -> line.trim('"')
                 typeOf<Int>() -> line.toInt()
                 typeOf<Long>() -> line.toLong()
                 typeOf<IntArray>() -> line.trim('[', ']')
@@ -51,20 +51,9 @@ internal fun runSolution(classifier: KClass<*>, vararg args: String) {
             }
         })
         when (result) {
+            is String -> println('"' + result + '"')
             is IntArray -> println(result.contentToString())
             is LongArray -> println(result.contentToString())
-            is ListNode -> println(buildString {
-                var node = result as ListNode?
-                append('[')
-                append(node!!.`val`)
-                node = node.next
-                while (node != null) {
-                    append(',')
-                    append(node.`val`)
-                    node = node.next
-                }
-                append(']')
-            })
             else -> println(result)
         }
     }
