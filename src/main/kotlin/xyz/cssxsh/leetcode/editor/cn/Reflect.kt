@@ -75,17 +75,19 @@ internal fun runSolution(classifier: KClass<*>, vararg args: String) {
             else -> println(result)
         }
     }
+
+    println()
 }
 
 @PublishedApi
 internal fun readExample(classifier: KClass<*>): Array<String> {
-    val clazz = classifier.java
-    val name = clazz.name.substringBefore('$').substringAfterLast('.')
-    println("---")
-    println("read $name example")
+    val clazz = classifier.java.enclosingClass ?: classifier.java
 
-    val url = clazz.getResource("$name.txt")
-        ?: throw IllegalArgumentException("not found $name.txt")
+    val url = clazz.getResource("${clazz.simpleName}.txt")
+        ?: throw IllegalArgumentException("not found $${clazz.simpleName}.txt")
+
+    println("---")
+    println("read $url")
 
     return url.openStream().use { it.bufferedReader().readLines().toTypedArray() }
 }
