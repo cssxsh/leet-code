@@ -3,7 +3,7 @@ package xyz.cssxsh.leetcode.editor.cn
 object No0438FindAllAnagramsInAString {
     @JvmStatic
     fun main(vararg args: String): Unit = runSolution<Solution>(args = args)
-    
+
     //leetcode submit region begin(Prohibit modification and deletion)
     class Solution {
         fun findAnagrams(s: String, p: String): List<Int> {

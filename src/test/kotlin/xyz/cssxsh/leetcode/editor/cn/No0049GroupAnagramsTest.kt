@@ -20,6 +20,5 @@ internal class No0049GroupAnagramsTest : AbstractSolutionTest() {
             listOf(listOf("a")),
             solution.groupAnagrams(strs = arrayOf("a"))
         )
-
     }
 }

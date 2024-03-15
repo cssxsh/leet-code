@@ -84,7 +84,7 @@ internal fun readExample(classifier: KClass<*>): Array<String> {
     val clazz = classifier.java.enclosingClass ?: classifier.java
 
     val url = clazz.getResource("${clazz.simpleName}.txt")
-        ?: throw IllegalArgumentException("not found $${clazz.simpleName}.txt")
+        ?: throw IllegalArgumentException("not found ${clazz.simpleName}.txt")
 
     println("---")
     println("read $url")

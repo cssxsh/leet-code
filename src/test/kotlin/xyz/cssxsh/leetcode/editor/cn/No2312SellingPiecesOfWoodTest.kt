@@ -21,7 +21,7 @@ internal class No2312SellingPiecesOfWoodTest : AbstractSolutionTest() {
             solution.sellingWood(
                 m = 4,
                 n = 6,
-                prices = arrayOf(intArrayOf(3,2,10), intArrayOf(1,4,2), intArrayOf(4,1,3))
+                prices = arrayOf(intArrayOf(3, 2, 10), intArrayOf(1, 4, 2), intArrayOf(4, 1, 3))
             )
         )
     }
