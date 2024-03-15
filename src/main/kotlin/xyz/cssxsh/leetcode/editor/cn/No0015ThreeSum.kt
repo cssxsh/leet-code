@@ -1,6 +1,9 @@
 package xyz.cssxsh.leetcode.editor.cn
 
 object No0015ThreeSum {
+    @JvmStatic
+    fun main(vararg args: String): Unit = runSolution<Solution>(args = args)
+
     //leetcode submit region begin(Prohibit modification and deletion)
     class Solution {
         fun threeSum(nums: IntArray): List<List<Int>> {

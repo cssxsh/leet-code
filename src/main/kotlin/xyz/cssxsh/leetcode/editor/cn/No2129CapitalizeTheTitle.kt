@@ -1,6 +1,9 @@
 package xyz.cssxsh.leetcode.editor.cn
 
 object No2129CapitalizeTheTitle {
+    @JvmStatic
+    fun main(vararg args: String): Unit = runSolution<Solution>(args = args)
+
     //leetcode submit region begin(Prohibit modification and deletion)
     class Solution {
         fun capitalizeTitle(title: String): String {

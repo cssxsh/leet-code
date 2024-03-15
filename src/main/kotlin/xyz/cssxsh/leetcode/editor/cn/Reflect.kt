@@ -17,13 +17,14 @@ internal fun runSolution(classifier: KClass<*>, vararg args: String) {
         runSolution(classifier = nested, args = args)
         return
     }
+    println(classifier.qualifiedName)
 
     val method = classifier.members.find { it.visibility == KVisibility.PUBLIC }
         ?: throw IllegalArgumentException("not found method")
     val lines = args.ifEmpty { readExample(classifier = classifier) }
 
     for (offset in lines.indices step method.parameters.size - 1) {
-        val result = method.callBy(args = method.parameters.associateWith { parameter ->
+        val values = method.parameters.associateWith { parameter ->
             if (parameter.kind == KParameter.Kind.INSTANCE) return@associateWith classifier.createInstance()
             val line = lines[offset + parameter.index - 1]
             when (parameter.type) {
@@ -47,13 +48,30 @@ internal fun runSolution(classifier: KClass<*>, vararg args: String) {
                         .fold(initial = root) { prev, v -> ListNode(v.toInt()).also { prev.next = it } }
                     root.next
                 }
+                typeOf<Array<String>>() -> line.trim('[', ']')
+                    .splitToSequence(',')
+                    .map { it.trim('"') }
+                    .toList()
+                    .toTypedArray()
+                typeOf<Array<IntArray>>() -> line.trim('[', ']')
+                    .splitToSequence("],[")
+                    .map { it.splitToSequence(',').map(String::toInt).toList().toIntArray() }
+                    .toList()
+                    .toTypedArray()
                 else -> throw IllegalArgumentException("unsupported $parameter")
             }
-        })
+        }
+        val result = method.callBy(args = values)
+        println("---")
         when (result) {
             is String -> println('"' + result + '"')
+            is Array<*> -> println(result.contentToString())
             is IntArray -> println(result.contentToString())
             is LongArray -> println(result.contentToString())
+            is Unit -> when (val v = values[method.parameters[1]]) {
+                is IntArray -> println(v.contentToString())
+                is LongArray -> println(v.contentToString())
+            }
             else -> println(result)
         }
     }
@@ -63,6 +81,9 @@ internal fun runSolution(classifier: KClass<*>, vararg args: String) {
 internal fun readExample(classifier: KClass<*>): Array<String> {
     val clazz = classifier.java
     val name = clazz.name.substringBefore('$').substringAfterLast('.')
+    println("---")
+    println("read $name example")
+
     val url = clazz.getResource("$name.txt")
         ?: throw IllegalArgumentException("not found $name.txt")
 

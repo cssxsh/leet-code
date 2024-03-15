@@ -1,14 +1,17 @@
 package xyz.cssxsh.leetcode.editor.cn
 
 object No2312SellingPiecesOfWood {
+    @JvmStatic
+    fun main(vararg args: String): Unit = runSolution<Solution>(args = args)
+
     //leetcode submit region begin(Prohibit modification and deletion)
     class Solution {
-
-        private val result = hashMapOf<Int, Long>()
-
         fun sellingWood(m: Int, n: Int, prices: Array<IntArray>): Long {
+            return sellingWood(m = m, n = n, prices = prices, cache = hashMapOf())
+        }
 
-            val s = result[m * 256 + n]
+        private fun sellingWood(m: Int, n: Int, prices: Array<IntArray>, cache: MutableMap<Int, Long>): Long {
+            val s = cache[m * 256 + n]
             if (s != null) return s
             var max = 0L
 
@@ -17,23 +20,23 @@ object No2312SellingPiecesOfWood {
                 max = maxOf(max, price.toLong())
             }
             if (max == 0L) {
-                result[m * 256 + n] = 0
+                cache[m * 256 + n] = 0
                 return 0
             }
 
             for (i in 1 .. m / 2) {
-                val l = sellingWood(m = i, n = n, prices = prices)
-                val r = sellingWood(m = m - i, n = n, prices = prices)
+                val l = sellingWood(m = i, n = n, prices = prices, cache = cache)
+                val r = sellingWood(m = m - i, n = n, prices = prices, cache = cache)
                 max = maxOf(max, l + r)
             }
 
             for (i in 1 .. n / 2) {
-                val u = sellingWood(m = m, n = i, prices = prices)
-                val d = sellingWood(m = m, n = n - i, prices = prices)
+                val u = sellingWood(m = m, n = i, prices = prices, cache = cache)
+                val d = sellingWood(m = m, n = n - i, prices = prices, cache = cache)
                 max = maxOf(max, u + d)
             }
 
-            result[m * 256 + n] = max
+            cache[m * 256 + n] = max
 
             return max
         }
