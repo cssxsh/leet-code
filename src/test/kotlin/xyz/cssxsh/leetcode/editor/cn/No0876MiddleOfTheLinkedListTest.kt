@@ -1,7 +1,7 @@
 package xyz.cssxsh.leetcode.editor.cn
 
 import org.junit.jupiter.api.*
-import xyz.cssxsh.leetcode.editor.cn.data.listNodeOf
+import xyz.cssxsh.leetcode.editor.cn.data.*
 
 internal class No0876MiddleOfTheLinkedListTest : AbstractSolutionTest() {
 
