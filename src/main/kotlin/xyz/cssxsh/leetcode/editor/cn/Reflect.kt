@@ -19,13 +19,13 @@ private fun KParameter.parse(line: String): Any? {
             .map { it.toLong() }
             .toList()
             .toLongArray()
-        typeOf<ListNode>() -> {
+        typeOf<ListNode>(), typeOf<ListNode?>() -> {
             line.trim('[', ']')
                 .splitToSequence(',')
                 .map { it.toInt() }
                 .toListNode()
         }
-        typeOf<TreeNode?>() -> {
+        typeOf<TreeNode>(), typeOf<TreeNode?>() -> {
             line.trim('[', ']')
                 .splitToSequence(',')
                 .map { it.toIntOrNull() }
@@ -60,7 +60,8 @@ internal fun runSolution(classifier: KClass<*>, vararg args: String) {
     }
     println(classifier.qualifiedName)
 
-    val method = classifier.members.find { it.visibility == KVisibility.PUBLIC }
+    val method = classifier.members.filter { it.visibility == KVisibility.PUBLIC }
+        .maxByOrNull { it.parameters.size }
         ?: throw IllegalArgumentException("not found method")
     val lines = args.ifEmpty { readExample(classifier = classifier) }
 
