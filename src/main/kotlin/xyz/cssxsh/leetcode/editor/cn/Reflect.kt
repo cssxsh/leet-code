@@ -4,6 +4,47 @@ import xyz.cssxsh.leetcode.editor.cn.data.*
 import kotlin.reflect.*
 import kotlin.reflect.full.*
 
+private fun KParameter.parse(line: String): Any? {
+    return when (type) {
+        typeOf<String>() -> line.trim('"')
+        typeOf<Int>() -> line.toInt()
+        typeOf<Long>() -> line.toLong()
+        typeOf<IntArray>() -> line.trim('[', ']')
+            .splitToSequence(',')
+            .map { it.toInt() }
+            .toList()
+            .toIntArray()
+        typeOf<LongArray>() -> line.trim('[', ']')
+            .splitToSequence(',')
+            .map { it.toLong() }
+            .toList()
+            .toLongArray()
+        typeOf<ListNode>() -> {
+            line.trim('[', ']')
+                .splitToSequence(',')
+                .map { it.toInt() }
+                .toListNode()
+        }
+        typeOf<TreeNode?>() -> {
+            line.trim('[', ']')
+                .splitToSequence(',')
+                .map { it.toIntOrNull() }
+                .toTreeNode()
+        }
+        typeOf<Array<String>>() -> line.trim('[', ']')
+            .splitToSequence(',')
+            .map { it.trim('"') }
+            .toList()
+            .toTypedArray()
+        typeOf<Array<IntArray>>() -> line.trim('[', ']')
+            .splitToSequence("],[")
+            .map { it.splitToSequence(',').map(String::toInt).toList().toIntArray() }
+            .toList()
+            .toTypedArray()
+        else -> throw IllegalArgumentException("unsupported $this")
+    }
+}
+
 @PublishedApi
 internal inline fun <reified T : Any> runSolution(vararg args: String) {
     runSolution(classifier = typeOf<T>().classifier as KClass<*>, args = args)
@@ -26,45 +67,7 @@ internal fun runSolution(classifier: KClass<*>, vararg args: String) {
     for (offset in lines.indices step method.parameters.size - 1) {
         val values = method.parameters.associateWith { parameter ->
             if (parameter.kind == KParameter.Kind.INSTANCE) return@associateWith classifier.createInstance()
-            val line = lines[offset + parameter.index - 1]
-            when (parameter.type) {
-                typeOf<String>() -> line.trim('"')
-                typeOf<Int>() -> line.toInt()
-                typeOf<Long>() -> line.toLong()
-                typeOf<IntArray>() -> line.trim('[', ']')
-                    .splitToSequence(',')
-                    .map { it.toInt() }
-                    .toList()
-                    .toIntArray()
-                typeOf<LongArray>() -> line.trim('[', ']')
-                    .splitToSequence(',')
-                    .map { it.toLong() }
-                    .toList()
-                    .toLongArray()
-                typeOf<ListNode>() -> {
-                    line.trim('[', ']')
-                        .splitToSequence(',')
-                        .map { it.toInt() }
-                        .toListNode()
-                }
-                typeOf<TreeNode?>() -> {
-                    line.trim('[', ']')
-                        .splitToSequence(',')
-                        .map { it.toIntOrNull() }
-                        .toTreeNode()
-                }
-                typeOf<Array<String>>() -> line.trim('[', ']')
-                    .splitToSequence(',')
-                    .map { it.trim('"') }
-                    .toList()
-                    .toTypedArray()
-                typeOf<Array<IntArray>>() -> line.trim('[', ']')
-                    .splitToSequence("],[")
-                    .map { it.splitToSequence(',').map(String::toInt).toList().toIntArray() }
-                    .toList()
-                    .toTypedArray()
-                else -> throw IllegalArgumentException("unsupported $parameter")
-            }
+            parameter.parse(line = lines[offset + parameter.index - 1])
         }
         val result = method.callBy(args = values)
         println("---")
@@ -95,4 +98,53 @@ internal fun readExample(classifier: KClass<*>): Array<String> {
     println("read $url")
 
     return url.openStream().use { it.bufferedReader().readLines().toTypedArray() }
+}
+
+@PublishedApi
+internal inline fun <reified T : Any> runInstance(vararg args: String) {
+    runSolution(classifier = typeOf<T>().classifier as KClass<*>, args = args)
+}
+
+@PublishedApi
+internal fun runInstance(classifier: KClass<*>, vararg args: String) {
+    println(classifier.qualifiedName)
+
+    lateinit var instance: Any
+
+
+    val lines = args.ifEmpty { readExample(classifier = classifier) }
+
+    val commands = lines[0].trim('[', ']')
+        .splitToSequence(',')
+        .map { it.trim('"') }
+
+    val parameters = lines[1].trim('[', ']')
+        .splitToSequence(',')
+        .map { it.trim('[', ']').splitToSequence(',').toList() }
+
+    for ((command, array) in commands zip parameters) {
+        if (command == classifier.simpleName) {
+            instance = classifier.createInstance()
+            continue
+        }
+        val method = classifier.members.find { it.name == command }
+            ?: throw IllegalArgumentException("not found method $command")
+
+        val values = method.parameters.associateWith { parameter ->
+            if (parameter.kind == KParameter.Kind.INSTANCE) return@associateWith instance
+            parameter.parse(line = array[parameter.index - 1])
+        }
+        val result = method.callBy(args = values)
+        println("---")
+        println("command: $command")
+        when (result) {
+            is String -> println('"' + result + '"')
+            is Array<*> -> println(result.contentToString())
+            is IntArray -> println(result.contentToString())
+            is LongArray -> println(result.contentToString())
+            else -> println(result)
+        }
+    }
+
+    println()
 }
