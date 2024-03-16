@@ -19,18 +19,15 @@ private fun KParameter.parse(line: String): Any? {
             .map { it.toLong() }
             .toList()
             .toLongArray()
-        typeOf<ListNode>(), typeOf<ListNode?>() -> {
-            line.trim('[', ']')
-                .splitToSequence(',')
-                .map { it.toInt() }
-                .toListNode()
-        }
-        typeOf<TreeNode>(), typeOf<TreeNode?>() -> {
-            line.trim('[', ']')
-                .splitToSequence(',')
-                .map { it.toIntOrNull() }
-                .toTreeNode()
-        }
+        typeOf<ListNode>(), typeOf<ListNode?>() -> line.trim('[', ']')
+            .splitToSequence(',')
+            .filter { it.isNotEmpty() }
+            .map { it.toInt() }
+            .toListNode()
+        typeOf<TreeNode>(), typeOf<TreeNode?>() -> line.trim('[', ']')
+            .splitToSequence(',')
+            .map { it.toIntOrNull() }
+            .toTreeNode()
         typeOf<Array<String>>() -> line.trim('[', ']')
             .splitToSequence(',')
             .map { it.trim('"') }
