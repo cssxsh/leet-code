@@ -42,11 +42,16 @@ internal fun runSolution(classifier: KClass<*>, vararg args: String) {
                     .toList()
                     .toLongArray()
                 typeOf<ListNode>() -> {
-                    val root = ListNode(0)
                     line.trim('[', ']')
                         .splitToSequence(',')
-                        .fold(initial = root) { prev, v -> ListNode(v.toInt()).also { prev.next = it } }
-                    root.next
+                        .map { it.toInt() }
+                        .toListNode()
+                }
+                typeOf<TreeNode?>() -> {
+                    line.trim('[', ']')
+                        .splitToSequence(',')
+                        .map { it.toIntOrNull() }
+                        .toTreeNode()
                 }
                 typeOf<Array<String>>() -> line.trim('[', ']')
                     .splitToSequence(',')

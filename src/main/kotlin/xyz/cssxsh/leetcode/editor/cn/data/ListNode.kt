@@ -1,37 +1,13 @@
 package xyz.cssxsh.leetcode.editor.cn.data
 
-class ListNode(var `val`: Int) {
+class ListNode(var `val`: Int) : AbstractNode<Int>() {
     var next: ListNode? = null
 
-    override fun toString(): String {
-        return buildString {
-            var node = this@ListNode as ListNode?
-            append('[')
-            append(node!!.`val`)
-            node = node.next
-            while (node != null) {
-                append(',')
-                append(node.`val`)
-                node = node.next
-            }
-            append(']')
-        }
-    }
-
-    override fun equals(other: Any?): Boolean {
-        var p = this
-        var q = other as? ListNode ?: return false
+    override fun iterator(): Iterator<Int> = iterator {
+        var node = this@ListNode
         while (true) {
-            if (p.`val` != q.`val`) return false
-            if (p.next == null || q.next == null) return true
-
-            p = p.next ?: break
-            q = q.next ?: break
+            yield(value = node.`val`)
+            node = node.next ?: break
         }
-        return false
-    }
-
-    override fun hashCode(): Int {
-        return toString().hashCode()
     }
 }
