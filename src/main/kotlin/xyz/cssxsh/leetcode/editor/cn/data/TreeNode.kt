@@ -5,21 +5,27 @@ class TreeNode(var `val`: Int) : AbstractNode<Int?>() {
     var right: TreeNode? = null
 
     override fun iterator(): Iterator<Int?> = iterator {
-        val stack = ArrayDeque<TreeNode>()
-        stack.addLast(element = this@TreeNode)
+        val queue = ArrayDeque<TreeNode>()
+        queue.addLast(element = this@TreeNode)
         yield(value = `val`)
-        while (stack.isEmpty().not()) {
-            val node = stack.removeLast()
+        var nulls = 0
+        while (queue.isEmpty().not()) {
+            val node = queue.removeFirst()
             val left = node.left
             if (left != null) {
+                while (nulls-- > 0) yield(value = null)
                 yield(value = left.`val`)
-                stack.addLast(element = left)
+                queue.addLast(element = left)
+            } else {
+                nulls++
             }
             val right = node.right
             if (right != null) {
-                if (left == null) yield(value = null)
+                while (nulls-- > 0) yield(value = null)
                 yield(value = right.`val`)
-                stack.addLast(element = right)
+                queue.addLast(element = right)
+            } else {
+                nulls++
             }
         }
     }
