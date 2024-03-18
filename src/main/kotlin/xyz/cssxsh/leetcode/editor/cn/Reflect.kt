@@ -24,6 +24,11 @@ internal fun String.parts(vararg delimiters: Char = charArrayOf(',')): Sequence<
                     if (text) continue
                     part--
                 }
+                ' ', '\t' -> {
+                    if (text) continue
+                    if (part != 0) continue
+                    start = index
+                }
                 in delimiters -> {
                     if (text) continue
                     if (part != 0) continue
@@ -49,6 +54,10 @@ private fun KParameter.parse(line: String): Any? {
             .map { it.toLong() }
             .toList()
             .toLongArray()
+        typeOf<CharArray>() -> line.parts()
+            .map { it[1] }
+            .toList()
+            .toCharArray()
         typeOf<ListNode>(), typeOf<ListNode?>() -> line.parts()
             .map { it.toInt() }
             .toListNode()
