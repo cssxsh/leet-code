@@ -93,7 +93,7 @@ internal fun runSolution(classifier: KClass<*>, vararg args: String) {
 
     val method = classifier.members.filter { it.visibility == KVisibility.PUBLIC }
         .maxByOrNull { it.parameters.size } ?: throw IllegalArgumentException("not found method")
-    val lines = args.ifEmpty { readExample(classifier = classifier) }
+    val lines = args.asList().ifEmpty { readExample(classifier = classifier) }
 
     for (offset in lines.indices step method.parameters.size - 1) {
         val values = method.parameters.associateWith { parameter ->
@@ -119,7 +119,7 @@ internal fun runSolution(classifier: KClass<*>, vararg args: String) {
 }
 
 @PublishedApi
-internal fun readExample(classifier: KClass<*>): Array<String> {
+internal fun readExample(classifier: KClass<*>): List<String> {
     val clazz = classifier.java.enclosingClass ?: classifier.java
 
     val url = clazz.getResource("${clazz.simpleName}.txt")
@@ -128,7 +128,7 @@ internal fun readExample(classifier: KClass<*>): Array<String> {
     println("---")
     println("read $url")
 
-    return url.openStream().use { it.bufferedReader().readLines().toTypedArray() }
+    return url.openStream().use { it.bufferedReader().readLines() }
 }
 
 @PublishedApi
@@ -142,7 +142,7 @@ internal fun runInstance(classifier: KClass<*>, vararg args: String) {
 
     var instance: Any? = null
 
-    val lines = args.ifEmpty { readExample(classifier = classifier) }
+    val lines = args.asList().ifEmpty { readExample(classifier = classifier) }
 
     val commands = lines[0].parts()
         .map { it.trim('"') }
