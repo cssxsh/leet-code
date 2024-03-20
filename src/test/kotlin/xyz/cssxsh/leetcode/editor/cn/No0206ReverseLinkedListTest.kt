@@ -10,15 +10,15 @@ internal class No0206ReverseLinkedListTest : AbstractSolutionTest() {
     @Test
     override fun example() {
         Assertions.assertEquals(
-            listNodeOf(1,2,3,4,5),
-            solution.reverseList(head = listNodeOf(5,4,3,2,1))
+            listNodeOf(1, 2, 3, 4, 5),
+            solution.reverseList(head = listNodeOf(5, 4, 3, 2, 1))
         )
         Assertions.assertEquals(
             listNodeOf(1, 2),
             solution.reverseList(head = listNodeOf(2, 1))
         )
         Assertions.assertEquals(
-            null,
+            null as ListNode?,
             solution.reverseList(head = null)
         )
     }

@@ -22,32 +22,26 @@ object No0617MergeTwoBinaryTrees {
             val tree2 = ArrayDeque<TreeNode?>()
             tree2.addLast(element = root2)
 
+            fun sum(node1: TreeNode?, node2: TreeNode?): TreeNode? {
+                if (node1 != null || node2 != null) {
+                    val result = TreeNode((node1?.`val` ?: 0) + (node2?.`val` ?: 0))
+
+                    tree.addLast(element = result)
+                    tree1.addLast(element = node1)
+                    tree2.addLast(element = node2)
+
+                    return result
+                }
+                return null
+            }
+
             while (tree.isEmpty().not()) {
                 val node = tree.removeFirst()
                 val node1 = tree1.removeFirst()
                 val node2 = tree2.removeFirst()
 
-                val left1 = node1?.left
-                val left2 = node2?.left
-                if (left1 != null || left2 != null) {
-                    val left = TreeNode((left1?.`val` ?: 0) + (left2?.`val` ?: 0))
-                    node.left = left
-
-                    tree.addLast(element = left)
-                    tree1.addLast(element = left1)
-                    tree2.addLast(element = left2)
-                }
-
-                val right1 = node1?.right
-                val right2 = node2?.right
-                if (right1 != null || right2 != null) {
-                    val right = TreeNode((right1?.`val` ?: 0) + (right2?.`val` ?: 0))
-                    node.right = right
-
-                    tree.addLast(element = right)
-                    tree1.addLast(element = right1)
-                    tree2.addLast(element = right2)
-                }
+                node.left = sum(node1 = node1?.left, node2 = node2?.left)
+                node.right = sum(node1 = node1?.right, node2 = node2?.right)
             }
 
             return root

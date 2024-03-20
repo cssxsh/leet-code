@@ -5,7 +5,7 @@ import xyz.cssxsh.leetcode.editor.cn.data.*
 object No0206ReverseLinkedList {
     @JvmStatic
     fun main(vararg args: String): Unit = runSolution<Solution>(args = args)
-    
+
     //leetcode submit region begin(Prohibit modification and deletion)
     class Solution {
         fun reverseList(head: ListNode?): ListNode? {
