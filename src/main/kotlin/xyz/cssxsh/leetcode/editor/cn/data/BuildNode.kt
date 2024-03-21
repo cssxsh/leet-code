@@ -46,3 +46,28 @@ internal fun Sequence<Int?>.toTreeNode(): TreeNode? {
 
     return root
 }
+
+@PublishedApi
+internal fun randomListNodeOf(vararg pairs: Pair<Int, Int?>): RandomListNode {
+    return pairs.asSequence().toRandomListNode() ?: throw IllegalArgumentException("empty")
+}
+
+@PublishedApi
+internal fun Sequence<Pair<Int, Int?>>.toRandomListNode(): RandomListNode? {
+    val root = RandomListNode(0)
+    val map = hashMapOf<Int, RandomListNode>()
+    var prev = root
+    var i = 0
+    for ((value, random) in this) {
+        val node = map.getOrPut(key = i) { RandomListNode(0) }
+        node.`val` = value
+        prev.next = node
+        prev = node
+        i++
+
+        random ?: continue
+        node.random = map.getOrPut(key = random) { RandomListNode(0) }
+    }
+
+    return root.next
+}
