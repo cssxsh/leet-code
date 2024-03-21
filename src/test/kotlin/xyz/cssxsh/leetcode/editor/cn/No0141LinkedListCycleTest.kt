@@ -1,7 +1,7 @@
 package xyz.cssxsh.leetcode.editor.cn
 
 import org.junit.jupiter.api.*
-import xyz.cssxsh.leetcode.editor.cn.data.listNodeOf
+import xyz.cssxsh.leetcode.editor.cn.data.*
 
 internal class No0141LinkedListCycleTest : AbstractSolutionTest() {
 
@@ -23,7 +23,7 @@ internal class No0141LinkedListCycleTest : AbstractSolutionTest() {
         )
         Assertions.assertEquals(
             false,
-            solution.hasCycle(head = null)
+            solution.hasCycle(head = null as ListNode?, pos = 0)
         )
     }
 }

@@ -19,7 +19,7 @@ internal class No0206ReverseLinkedListTest : AbstractSolutionTest() {
         )
         Assertions.assertEquals(
             null as ListNode?,
-            solution.reverseList(head = null)
+            solution.reverseList(head = null as ListNode?)
         )
     }
 }

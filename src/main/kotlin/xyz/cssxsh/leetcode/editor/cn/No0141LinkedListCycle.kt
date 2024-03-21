@@ -9,12 +9,22 @@ object No0141LinkedListCycle {
     //leetcode submit region begin(Prohibit modification and deletion)
     class Solution {
         fun hasCycle(head: ListNode?, pos: Int): Boolean {
-            head?.cycle(pos = pos)
+            run cycle@{
+                var p = head ?: return@cycle
+                var q = p
+                var i = 0
+                while (i != pos) {
+                    p = p.next ?: break
+                    i++
+                    q = p
+                }
+                p.next = if (i == pos) q else null
+            }
             return hasCycle(head = head)
         }
 
-        fun hasCycle(head: ListNode?): Boolean {
-
+        @PublishedApi
+        internal fun hasCycle(head: ListNode?): Boolean {
             var p = head ?: return false
             var q = p
 
