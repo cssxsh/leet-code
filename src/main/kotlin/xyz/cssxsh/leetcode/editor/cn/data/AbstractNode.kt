@@ -1,6 +1,10 @@
 package xyz.cssxsh.leetcode.editor.cn.data
 
-abstract class AbstractNode<T> : Sequence<T> {
+abstract class AbstractNode<T, N : AbstractNode<T, N>> : Sequence<T> {
+
+    abstract val `val`: T
+
+    abstract fun children(): Sequence<N?>
 
     override fun toString(): String = joinToString(separator = ",", prefix = "[", postfix = "]")
 
@@ -9,6 +13,8 @@ abstract class AbstractNode<T> : Sequence<T> {
         val q = when (other) {
             is Iterable<*> -> other.iterator()
             is Sequence<*> -> other.iterator()
+            is Array<*> -> other.iterator()
+            is IntArray -> other.iterator()
             else -> return false
         }
 

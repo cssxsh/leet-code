@@ -1,7 +1,9 @@
 package xyz.cssxsh.leetcode.editor.cn.data
 
-class ListNode(var `val`: Int) : AbstractNode<Int>() {
+class ListNode(override var `val`: Int) : AbstractNode<Int, ListNode>() {
     var next: ListNode? = null
+
+    override fun children(): Sequence<ListNode?> = sequenceOf(next)
 
     override fun iterator(): Iterator<Int> = iterator {
         var slow = this@ListNode
