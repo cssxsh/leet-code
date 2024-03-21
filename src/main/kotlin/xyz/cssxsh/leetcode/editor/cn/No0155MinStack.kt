@@ -29,6 +29,15 @@ object No0155MinStack {
         fun getMin(): Int {
             return min[i]
         }
+
+        override fun toString(): String {
+            return buildString {
+                append("MinStack(")
+                append("array=")
+                (0 .. i).joinTo(buffer = this, prefix = "[", postfix = "]") { array[it].toString() }
+                append(")")
+            }
+        }
     }
     //leetcode submit region end(Prohibit modification and deletion)
 

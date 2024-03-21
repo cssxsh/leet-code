@@ -137,7 +137,7 @@ internal fun readExample(classifier: KClass<*>): List<String> {
 
 @PublishedApi
 internal inline fun <reified T : Any> runInstance(vararg args: String) {
-    runSolution(classifier = typeOf<T>().classifier as KClass<*>, args = args)
+    runInstance(classifier = typeOf<T>().classifier as KClass<*>, args = args)
 }
 
 @PublishedApi
@@ -178,6 +178,7 @@ internal fun runInstance(classifier: KClass<*>, vararg args: String) {
             is Array<*> -> println(result.contentToString())
             is IntArray -> println(result.contentToString())
             is LongArray -> println(result.contentToString())
+            is Unit -> println(instance)
             else -> println(result)
         }
     }
