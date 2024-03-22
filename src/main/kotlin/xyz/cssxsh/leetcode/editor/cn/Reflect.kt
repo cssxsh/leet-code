@@ -64,6 +64,9 @@ private fun KParameter.parse(line: String): Any? {
         typeOf<TreeNode>(), typeOf<TreeNode?>() -> line.parts()
             .map { it.toIntOrNull() }
             .toTreeNode()
+        typeOf<RandomListNode>(), typeOf<RandomListNode?>() -> line.parts()
+            .map { it.parts().toList().let { (a, b) -> a.toInt() to b.toIntOrNull() } }
+            .toRandomListNode()
         typeOf<Array<String>>() -> line.parts()
             .map { it.trim('"') }
             .toList()
