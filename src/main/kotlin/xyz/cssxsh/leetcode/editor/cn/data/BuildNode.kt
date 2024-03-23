@@ -13,6 +13,23 @@ internal fun Sequence<Int>.toListNode(): ListNode? {
 }
 
 @PublishedApi
+internal infix fun Pair<ListNode, ListNode>.intersection(skip: Pair<Int, Int>): Pair<ListNode, ListNode> {
+    val a = ListNode(0).apply { next = first }
+    val b = ListNode(0).apply { next = second }
+
+    var i = 0
+    var pa = a
+    while (i++ < skip.first) pa = pa.next ?: throw IllegalArgumentException("$first too short")
+    i = 0
+    var pb = b
+    while (i++ < skip.second) pb = pb.next ?: throw IllegalArgumentException("$second too short")
+
+    pb.next = pa.next
+
+    return a.next!! to b.next!!
+}
+
+@PublishedApi
 internal fun treeNodeOf(vararg values: Int?): TreeNode? {
     return values.asSequence().toTreeNode()
 }

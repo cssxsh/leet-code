@@ -11,7 +11,7 @@ object No0437PathSumIii {
         fun pathSum(root: TreeNode?, targetSum: Int): Int {
             if (root == null) return 0
 
-            var result = 0
+//            var result = 0
 
 //            fun dfs(root: TreeNode?, target: Long): Int {
 //                if (root == null) return 0
@@ -52,9 +52,8 @@ object No0437PathSumIii {
             }
 
             prefix[0] = 1
-            result = dfs(root = root, prev = 0)
 
-            return result
+            return dfs(root = root, prev = 0)
         }
     }
     //leetcode submit region end(Prohibit modification and deletion)

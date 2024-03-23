@@ -27,7 +27,7 @@ class ListNode(override var `val`: Int) : AbstractNode<Int, ListNode>() {
         }
     }
 
-    fun cycle(pos: Int) {
+    fun cycle(pos: Int): ListNode {
         run check@{
             var fast = this@ListNode
             var slow = this@ListNode
@@ -50,5 +50,7 @@ class ListNode(override var `val`: Int) : AbstractNode<Int, ListNode>() {
         }
 
         p.next = q
+
+        return this
     }
 }

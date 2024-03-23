@@ -8,7 +8,8 @@ object No0141LinkedListCycle {
 
     //leetcode submit region begin(Prohibit modification and deletion)
     class Solution {
-        fun hasCycle(head: ListNode?, pos: Int): Boolean {
+        @PublishedApi
+        internal fun test(head: ListNode?, pos: Int): Boolean {
             head?.also { instance ->
                 val member = ListNode::class.members
                     .find { it.name == "cycle" } ?: return@also
@@ -17,8 +18,7 @@ object No0141LinkedListCycle {
             return hasCycle(head = head)
         }
 
-        @PublishedApi
-        internal fun hasCycle(head: ListNode?): Boolean {
+        fun hasCycle(head: ListNode?): Boolean {
             var p = head ?: return false
             var q = p
 

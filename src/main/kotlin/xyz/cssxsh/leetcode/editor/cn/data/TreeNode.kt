@@ -27,4 +27,19 @@ class TreeNode(override var `val`: Int) : AbstractNode<Int?, TreeNode>() {
             }
         }
     }
+
+    fun find(value: Int): TreeNode? {
+        val queue = ArrayDeque<TreeNode>()
+        queue.addLast(element = this)
+        while (queue.isEmpty().not()) {
+            val node = queue.removeFirst()
+            if (node.`val` == value) return node
+            for (child in node.children()) {
+                if (child == null) continue
+                queue.addLast(element = child)
+            }
+        }
+
+        return null
+    }
 }

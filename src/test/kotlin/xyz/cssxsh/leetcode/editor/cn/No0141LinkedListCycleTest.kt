@@ -11,19 +11,19 @@ internal class No0141LinkedListCycleTest : AbstractSolutionTest() {
     override fun example() {
         Assertions.assertEquals(
             true,
-            solution.hasCycle(head = listNodeOf(3, 2, 0, -1), pos = 1)
+            solution.hasCycle(head = listNodeOf(3, 2, 0, -1).cycle(pos = 1))
         )
         Assertions.assertEquals(
             true,
-            solution.hasCycle(head = listNodeOf(1, 2), pos = 0)
+            solution.hasCycle(head = listNodeOf(1, 2).cycle(pos = 0))
         )
         Assertions.assertEquals(
             false,
-            solution.hasCycle(head = listNodeOf(1), pos = -1)
+            solution.hasCycle(head = listNodeOf(1).cycle(pos = -1))
         )
         Assertions.assertEquals(
             false,
-            solution.hasCycle(head = null as ListNode?, pos = 0)
+            solution.hasCycle(head = null as ListNode?)
         )
     }
 }

@@ -102,7 +102,8 @@ internal fun runSolution(classifier: KClass<*>, vararg args: String) {
     }
     println(classifier.qualifiedName)
 
-    val method = classifier.members.find { it.visibility == KVisibility.PUBLIC }
+    val method = classifier.members.find { it.name == "test" }
+        ?: classifier.members.find { it.visibility == KVisibility.PUBLIC }
         ?: throw IllegalArgumentException("not found method")
     val lines = args.asList().ifEmpty { readExample(classifier = classifier) }
 

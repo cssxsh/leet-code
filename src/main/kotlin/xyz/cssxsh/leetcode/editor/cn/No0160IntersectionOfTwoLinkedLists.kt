@@ -8,13 +8,8 @@ object No0160IntersectionOfTwoLinkedLists {
 
     //leetcode submit region begin(Prohibit modification and deletion)
     class Solution {
-        fun getIntersectionNode(
-            intersectVal: Int,
-            listA: ListNode,
-            listB: ListNode,
-            skipA: Int,
-            skipB: Int
-        ): ListNode? {
+        @PublishedApi
+        internal fun test(intersectVal: Int, listA: ListNode, listB: ListNode, skipA: Int, skipB: Int): ListNode? {
             val a = ListNode(0).apply { next = listA }
             val b = ListNode(0).apply { next = listB }
 
@@ -32,8 +27,7 @@ object No0160IntersectionOfTwoLinkedLists {
             return getIntersectionNode(headA = a.next!!, headB = b.next!!)
         }
 
-        @PublishedApi
-        internal fun getIntersectionNode(headA: ListNode, headB: ListNode): ListNode? {
+        fun getIntersectionNode(headA: ListNode, headB: ListNode): ListNode? {
             if (headA === headB) return headA
             val a = ListNode(0).apply { next = headA }
             val b = ListNode(0).apply { next = headB }

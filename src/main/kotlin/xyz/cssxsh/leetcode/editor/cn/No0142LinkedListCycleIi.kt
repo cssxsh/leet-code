@@ -8,7 +8,8 @@ object No0142LinkedListCycleIi {
 
     //leetcode submit region begin(Prohibit modification and deletion)
     class Solution {
-        fun detectCycle(head: ListNode?, pos: Int): ListNode? {
+        @PublishedApi
+        internal fun test(head: ListNode?, pos: Int): ListNode? {
             head?.also { instance ->
                 val member = ListNode::class.members
                     .find { it.name == "cycle" } ?: return@also
@@ -17,8 +18,7 @@ object No0142LinkedListCycleIi {
             return detectCycle(head = head)
         }
 
-        @PublishedApi
-        internal fun detectCycle(head: ListNode?): ListNode? {
+        fun detectCycle(head: ListNode?): ListNode? {
             var flag = head ?: return null
             var slow = flag
             var fast = flag
