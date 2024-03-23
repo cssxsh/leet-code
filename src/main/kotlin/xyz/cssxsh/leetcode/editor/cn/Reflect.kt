@@ -83,6 +83,9 @@ private fun KParameter.parse(line: String): Any? {
             .map { it.parts().map(String::toInt).toListNode() }
             .toList()
             .toTypedArray()
+        typeOf<List<String>>() -> line.parts()
+            .map { it.trim('"') }
+            .toList()
         else -> throw IllegalArgumentException("unsupported $this")
     }
 }
