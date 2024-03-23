@@ -31,7 +31,7 @@ internal class No0079WordSearchTest : AbstractSolutionTest() {
             )
         )
         Assertions.assertEquals(
-            true,
+            false,
             solution.exist(
                 board = arrayOf(
                     charArrayOf('A', 'B', 'C', 'E'),

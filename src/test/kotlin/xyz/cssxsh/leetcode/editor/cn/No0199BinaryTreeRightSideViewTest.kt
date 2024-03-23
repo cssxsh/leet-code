@@ -14,7 +14,7 @@ internal class No0199BinaryTreeRightSideViewTest : AbstractSolutionTest() {
             solution.rightSideView(root = treeNodeOf(1, 2, 3, null, 5, null, 4))
         )
         Assertions.assertEquals(
-            listOf(1, null, 3),
+            listOf(1, 3),
             solution.rightSideView(root = treeNodeOf(1, 3))
         )
         Assertions.assertEquals(

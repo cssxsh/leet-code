@@ -10,7 +10,7 @@ internal class No0108ConvertSortedArrayToBinarySearchTreeTest : AbstractSolution
     @Test
     override fun example() {
         Assertions.assertEquals(
-            treeNodeOf(0, -10, 5, null, -3, null, 9),
+            treeNodeOf(0, -3, 9, -10, null, 5),
             solution.sortedArrayToBST(nums = intArrayOf(-10, -3, 0, 5, 9))
         )
         Assertions.assertEquals(
