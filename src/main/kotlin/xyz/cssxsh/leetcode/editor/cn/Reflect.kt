@@ -75,6 +75,10 @@ private fun KParameter.parse(line: String): Any? {
             .map { it.parts().map(String::toInt).toList().toIntArray() }
             .toList()
             .toTypedArray()
+        typeOf<Array<CharArray>>() -> line.parts()
+            .map { it.parts().map { s -> s[1] }.toList().toCharArray() }
+            .toList()
+            .toTypedArray()
         typeOf<Array<ListNode?>>() -> line.parts()
             .map { it.parts().map(String::toInt).toListNode() }
             .toList()
