@@ -9,9 +9,10 @@ object No0039CombinationSum {
         fun combinationSum(candidates: IntArray, target: Int): List<List<Int>> {
             val n = candidates.size
 
+            val counts = IntArray(size = n)
             val result = mutableListOf<List<Int>>()
 
-            fun dfs(target: Int, counts: IntArray, begin: Int) {
+            fun dfs(target: Int, begin: Int) {
                 if (target < 0) return
                 if (target == 0) {
                     result.add(element = buildList {
@@ -24,12 +25,12 @@ object No0039CombinationSum {
 
                 for (i in begin until n) {
                     counts[i]++
-                    dfs(target = target - candidates[i], counts = counts, begin = i)
+                    dfs(target = target - candidates[i], begin = i)
                     counts[i]--
                 }
             }
 
-            dfs(target = target, counts = IntArray(size = n), begin = 0)
+            dfs(target = target, begin = 0)
 
             return result
         }

@@ -1,6 +1,6 @@
 package xyz.cssxsh.leetcode.editor.cn
 
-import xyz.cssxsh.leetcode.editor.cn.data.ListNode
+import xyz.cssxsh.leetcode.editor.cn.data.*
 
 object No0021MergeTwoSortedLists {
     @JvmStatic

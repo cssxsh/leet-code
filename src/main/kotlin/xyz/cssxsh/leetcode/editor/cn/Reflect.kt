@@ -119,7 +119,7 @@ internal fun runSolution(classifier: KClass<*>, vararg args: String) {
         println("---")
         when (result) {
             is String -> println('"' + result + '"')
-            is Array<*> -> println(result.contentToString())
+            is Array<*> -> println(result.contentDeepToString())
             is IntArray -> println(result.contentToString())
             is LongArray -> println(result.contentToString())
             is Unit -> when (val v = values[method.parameters[1]]) {
@@ -186,7 +186,7 @@ internal fun runInstance(classifier: KClass<*>, vararg args: String) {
         println("command: $command")
         when (result) {
             is String -> println('"' + result + '"')
-            is Array<*> -> println(result.contentToString())
+            is Array<*> -> println(result.contentDeepToString())
             is IntArray -> println(result.contentToString())
             is LongArray -> println(result.contentToString())
             is Unit -> println(instance)

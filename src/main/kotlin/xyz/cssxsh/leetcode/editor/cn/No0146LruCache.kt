@@ -54,6 +54,17 @@ object No0146LruCache {
             node.prev.next = node.next
             node.next.prev = node.prev
         }
+
+        override fun toString(): String {
+            return buildString {
+                append("LRUCache(")
+                append("cache=")
+                cache.values.joinTo(buffer = this, prefix = "{", postfix = "}") { node ->
+                    "${node.key}=${node.value}"
+                }
+                append(")")
+            }
+        }
     }
 
     private class Node(val key: Int = 0, var value: Int = 0) {

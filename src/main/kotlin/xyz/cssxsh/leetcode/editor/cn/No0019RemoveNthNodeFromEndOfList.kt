@@ -9,8 +9,7 @@ object No0019RemoveNthNodeFromEndOfList {
     //leetcode submit region begin(Prohibit modification and deletion)
     class Solution {
         fun removeNthFromEnd(head: ListNode?, n: Int): ListNode? {
-            val root = ListNode(0)
-            root.next = head
+            val root = ListNode(0).apply { next = head }
 
             var fast = root
             var slow = root

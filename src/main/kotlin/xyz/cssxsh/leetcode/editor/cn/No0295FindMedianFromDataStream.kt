@@ -36,6 +36,16 @@ object No0295FindMedianFromDataStream {
                 left.peek() / 1.0
             }
         }
+
+        override fun toString(): String {
+            return buildString {
+                append("MedianFinder(")
+                append("left=$left")
+                append(", ")
+                append("right=$right")
+                append(")")
+            }
+        }
     }
     //leetcode submit region end(Prohibit modification and deletion)
 }
