@@ -4,40 +4,29 @@ import org.junit.jupiter.api.*
 
 internal class No0155MinStackTest : AbstractSolutionTest() {
 
-    override val solution = No0155MinStack.MinStack()
-
-    @Test
-    override fun run() {
-        Assertions.assertDoesNotThrow {
-            runInstance(classifier = solution::class)
-        }
-    }
+    override val solution = No0155MinStack.MinStack::class
 
     @Test
     override fun example() {
         Assertions.assertDoesNotThrow {
-            solution.push(-2)
+            val instance = No0155MinStack.MinStack()
+
+            instance.push(-2)
+            instance.push(0)
+            instance.push(-3)
+            Assertions.assertEquals(
+                -3,
+                instance.getMin()
+            )
+            instance.pop()
+            Assertions.assertEquals(
+                0,
+                instance.top()
+            )
+            Assertions.assertEquals(
+                -2,
+                instance.getMin()
+            )
         }
-        Assertions.assertDoesNotThrow {
-            solution.push(0)
-        }
-        Assertions.assertDoesNotThrow {
-            solution.push(-3)
-        }
-        Assertions.assertEquals(
-            -3,
-            solution.getMin()
-        )
-        Assertions.assertDoesNotThrow {
-            solution.pop()
-        }
-        Assertions.assertEquals(
-            0,
-            solution.top()
-        )
-        Assertions.assertEquals(
-            -2,
-            solution.getMin()
-        )
     }
 }

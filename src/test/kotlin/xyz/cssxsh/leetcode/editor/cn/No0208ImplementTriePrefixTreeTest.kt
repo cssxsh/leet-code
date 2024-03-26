@@ -4,41 +4,30 @@ import org.junit.jupiter.api.*
 
 internal class No0208ImplementTriePrefixTreeTest : AbstractSolutionTest() {
 
-    override val solution = No0208ImplementTriePrefixTree.Trie()
-
-    @Test
-    override fun run() {
-        Assertions.assertDoesNotThrow {
-            runInstance(classifier = solution::class)
-        }
-    }
+    override val solution = No0208ImplementTriePrefixTree.Trie::class
 
     @Test
     override fun example() {
         Assertions.assertDoesNotThrow {
-            solution.insert(word = "apple")
-        }
-        Assertions.assertEquals(
-            true,
-            solution.search(word = "apple")
-        )
-        Assertions.assertEquals(
-            false,
-            solution.search(word = "app")
-        )
-        Assertions.assertEquals(
-            true,
-            solution.startsWith(prefix = "app")
-        )
-        Assertions.assertDoesNotThrow {
-            solution.insert(word = "app")
-        }
-        Assertions.assertEquals(
-            true,
-            solution.search(word = "app")
-        )
-        Assertions.assertDoesNotThrow {
-            println(solution.toString())
+            val instance = No0208ImplementTriePrefixTree.Trie()
+            instance.insert(word = "apple")
+            Assertions.assertEquals(
+                true,
+                instance.search(word = "apple")
+            )
+            Assertions.assertEquals(
+                false,
+                instance.search(word = "app")
+            )
+            Assertions.assertEquals(
+                true,
+                instance.startsWith(prefix = "app")
+            )
+            instance.insert(word = "app")
+            Assertions.assertEquals(
+                true,
+                instance.search(word = "app")
+            )
         }
     }
 }

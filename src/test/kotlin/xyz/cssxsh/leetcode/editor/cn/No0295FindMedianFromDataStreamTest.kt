@@ -4,31 +4,24 @@ import org.junit.jupiter.api.*
 
 internal class No0295FindMedianFromDataStreamTest : AbstractSolutionTest() {
 
-    override val solution = No0295FindMedianFromDataStream.MedianFinder()
-
-    @Test
-    override fun run() {
-        Assertions.assertDoesNotThrow {
-            runInstance(classifier = solution::class)
-        }
-    }
+    override val solution = No0295FindMedianFromDataStream.MedianFinder::class
 
     @Test
     override fun example() {
         Assertions.assertDoesNotThrow {
-            solution.addNum(num = 1)
-            solution.addNum(num = 2)
+            val instance = No0295FindMedianFromDataStream.MedianFinder()
+
+            instance.addNum(num = 1)
+            instance.addNum(num = 2)
+            Assertions.assertEquals(
+                1.5,
+                instance.findMedian()
+            )
+            instance.addNum(num = 3)
+            Assertions.assertEquals(
+                2.0,
+                instance.findMedian()
+            )
         }
-        Assertions.assertEquals(
-            1.5,
-            solution.findMedian()
-        )
-        Assertions.assertDoesNotThrow {
-            solution.addNum(num = 3)
-        }
-        Assertions.assertEquals(
-            2.0,
-            solution.findMedian()
-        )
     }
 }
