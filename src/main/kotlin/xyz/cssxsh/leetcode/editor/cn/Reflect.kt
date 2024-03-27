@@ -67,6 +67,9 @@ private fun KParameter.parse(line: String): Any? {
         typeOf<RandomListNode>(), typeOf<RandomListNode?>() -> line.parts()
             .map { it.parts().toList().let { (a, b) -> a.toInt() to b.toIntOrNull() } }
             .toRandomListNode()
+        typeOf<GraphNode>(), typeOf<GraphNode?>() -> line.parts()
+            .map { it.parts().map(String::toInt).toList() }
+            .toGraphNode()
         typeOf<Array<String>>() -> line.parts()
             .map { it.trim('"') }
             .toList()

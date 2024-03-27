@@ -88,3 +88,24 @@ internal fun Sequence<Pair<Int, Int?>>.toRandomListNode(): RandomListNode? {
 
     return root.next
 }
+
+@PublishedApi
+internal fun graphNodeOf(vararg neighbors: List<Int>): GraphNode? {
+    return neighbors.asSequence().toGraphNode()
+}
+
+@PublishedApi
+internal fun Sequence<List<Int>>.toGraphNode(): GraphNode? {
+    val map = hashMapOf<Int, GraphNode>()
+    var i = 1
+    for (neighbors in this) {
+        val current = map.getOrPut(key = i) { GraphNode(i) }
+        for (neighbor in neighbors) {
+            val node = map.getOrPut(key = neighbor) { GraphNode(neighbor) }
+            current.neighbors.add(element = node)
+        }
+        i++
+    }
+
+    return map[1]
+}
