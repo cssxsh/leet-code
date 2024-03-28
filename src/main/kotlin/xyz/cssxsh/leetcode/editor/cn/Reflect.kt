@@ -46,6 +46,7 @@ private fun KParameter.parse(line: String): Any? {
         typeOf<String>() -> line.trim('"')
         typeOf<Int>() -> line.toInt()
         typeOf<Long>() -> line.toLong()
+        typeOf<Double>() -> line.toDouble()
         typeOf<IntArray>() -> line.parts()
             .map { it.toInt() }
             .toList()
